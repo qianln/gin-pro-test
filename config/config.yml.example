@@ -1,0 +1,49 @@
+AppDebug: true
+AppName: gin-pro
+
+HttpServer:
+    Port: ":8001"                       # 项目端口
+    AllowCrossDomain: true              # 是否允许跨域
+
+Mysql:
+    Host: "127.0.0.1"                   # 地址
+    Port: 3306                          # 端口
+    DataBase: "GinPro"                  # 库名
+    User: "root"                        # 用户名
+    Pass: "123456"                      # 密码
+    Prefix: "of_"                       # 前缀
+    Charset: "utf8"                     # 编码
+    SetMaxIdleConns: 10                 # 连接池最大闲置的连接数
+    SetMaxOpenConns: 128                # 连接池最大打开的连接数
+    SetConnMaxLifetime: 60              # 连接不活动时的最大生存时间(秒)
+    SlowThreshold: 30                   # 慢 SQL 阈值
+
+Redis:
+    Host: "127.0.0.1"                   # 地址
+    Port: 6379                          # 端口
+    Password:                           # 密码
+    IndexDb: 1                          # 连接的数据库
+    MaxIdle: 10                         # 最大空闲数
+    MaxActive: 1000                     # 最大活跃数
+    IdleTimeout: 60                     # 最大的空闲连接等待时间
+
+SnowFlake:
+    SnowFlakeMachineId: 1               # 如果本项目同时部署在多台机器，并且需要同时使用该算法，请为每一台机器设置不同的ID，区间范围: [0,1023]
+
+Logs:
+    GinProLogPath: "/storage/logs"      # 日志路径
+    TextFormat: "json"                  # 记录日志的格式，参数选项：console、json ， console 表示一般的文本格式
+    TimePrecision: "millisecond"        # 记录日志时，相关的时间精度，该参数选项：second  、 millisecond ， 分别表示 秒 和 毫秒 ,默认为毫秒级别
+    MaxSize: 200                        # 每个日志的最大尺寸(以MB为单位）， 超过该值，系统将会自动进行切割
+    MaxBackups: 60                      # 保留旧日志最大个数
+    MaxAge: 30                          # 保留旧日志最大天数
+    Compress: false                     # 日志备份时，是否进行压缩
+
+Token:
+    JwtTokenSignKey: "gin-pro"          # 设置token生成时加密的签名
+    JwtTokenOnlineUsers: 10             # 一个账号密码允许最大获取几个有效的token，当超过这个值，第一次获取的token的账号、密码就会失效
+    JwtTokenCreatedExpireAt: 28800      # 创建时token默认有效秒数（token生成时间加上该时间秒数，算做有效期）,3600*8=28800 等于8小时
+    JwtTokenRefreshAllowSec: 86400      # 对于过期的token，允许在多少小时之内刷新，超过此时间则不允许刷新换取新token，86400=3600*24，即token过期24小时之内允许换新token
+    JwtTokenRefreshExpireAt: 36000      # 对于过期的token，支持从相关接口刷新获取新的token，它有效期为10个小时，3600*10=36000 等于10小时
+    BindContextKeyName: "userToken"     # 用户在 header 头部提交的token绑定到上下文时的键名，方便直接从上下文(gin.context)直接获取每个用户的id等信息
+    IsCacheToRedis: 0                   # 用户token是否缓存到redis, 如果已经正确配置了redis,建议设置为1, 开启redis缓存token，（1=用户token缓存到redis; 0=token只存在于mysql）

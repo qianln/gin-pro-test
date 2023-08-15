@@ -1,0 +1,15 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+storage/logs/*
+*.out
+/config/config.yml
+/.hotbuild.toml
+/tmp/tmp_bin
+/storage/logs/*.log
+
+
