@@ -1,6 +1,7 @@
 package open
 
 import (
+	"gin-pro/app/core/system"
 	"gin-pro/app/global/consts"
 	"gin-pro/app/http/controllers"
 	"gin-pro/app/modules/models"
@@ -19,9 +20,13 @@ type DemoController struct {
 }
 
 func (d DemoController) Index(c *gin.Context) {
-	version := c.GetString(consts.Param + "version")
+
+	version := c.GetString(system.ParamPrefix + "version")
+
 	response.Success(c, consts.HttpStatusOkMsg, gin.H{
-		"say":     "Hello GinPro",
-		"version": version,
+		"say":         "Hello GinPro",
+		"SnowFlakeId": system.SnowFlake.GetId(),
+		"version":     version,
 	})
+
 }

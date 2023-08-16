@@ -12,7 +12,5 @@ func LoadDemoRouter(e *gin.Engine) {
 	d := e.Group("/open/demo").Use(cors.Next())
 	{
 		d.Use(demo.NewIndexValidator().CheckParams).GET("/index", open.NewDemoController().Index)
-
 	}
-
 }

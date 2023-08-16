@@ -51,7 +51,7 @@ func initRouter() *gin.Engine {
 }
 
 func registerRouter(e *gin.Engine) {
-	// Todo 注册其他分组下的路由
+	// todo 注册其他分组下的路由
 	open.LoadDemoRouter(e)
 }
 

@@ -8,9 +8,6 @@ type IConfig interface {
 	//ConfigFileChangeListen 监听文件变化
 	ConfigFileChangeListen()
 
-	// Clone 允许 clone 一个相同功能的结构体
-	Clone(fileName string) IConfig
-
 	// Get 一个原始值
 	Get(keyName string) interface{}
 

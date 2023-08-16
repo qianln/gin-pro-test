@@ -11,11 +11,10 @@ import (
 
 func GetOneMysqlClient() (*gorm.DB, error) {
 
-	dsn := getDsnByConfig()
+	// 获取连接句柄
+	dbDial := mysql.Open(getDsnByConfig())
 
-	dbDialector := mysql.Open(dsn)
-
-	gormDb, err := gorm.Open(dbDialector, &gorm.Config{
+	gormDb, err := gorm.Open(dbDial, &gorm.Config{
 		SkipDefaultTransaction: true,
 		PrepareStmt:            true,
 		Logger:                 redefineLog(),
@@ -51,6 +50,7 @@ func getDsnByConfig() string {
 	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s&parseTime=false&loc=Local&parseTime=true", User, Pass, Host, Port, DataBase, Charset)
 }
 
+// 创建自定义日志模块
 func redefineLog() gormLogger.Interface {
 	return NewCustomLog(
 		SetInfoStrFormat("[info] %s\n"),

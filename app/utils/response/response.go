@@ -54,41 +54,8 @@ func ValidatorError(c *gin.Context, err error) {
 	c.Abort()
 }
 
-// ErrorParam 参数校验错误
+// ErrorParam 自定义规则参数校验错误
 func ErrorParam(c *gin.Context, wrongParam interface{}) {
 	ReturnJson(c, http.StatusBadRequest, consts.ValidatorParamsCheckFailCode, consts.ValidatorParamsCheckFailMsg, wrongParam)
-	c.Abort()
-}
-
-// TokenErrorParam token 参数校验错误
-func TokenErrorParam(c *gin.Context, wrongParam interface{}) {
-	ReturnJson(c, http.StatusUnauthorized, consts.ValidatorParamsCheckFailCode, consts.ValidatorParamsCheckFailMsg, wrongParam)
-	c.Abort()
-}
-
-// ErrorTokenAuthFail token 权限校验失败
-func ErrorTokenAuthFail(c *gin.Context) {
-	ReturnJson(c, http.StatusUnauthorized, http.StatusUnauthorized, consts.ErrorsNoAuthorization, "")
-	//终止可能已经被加载的其他回调函数的执行
-	c.Abort()
-}
-
-// ErrorTokenRefreshFail token不符合刷新条件
-func ErrorTokenRefreshFail(c *gin.Context) {
-	ReturnJson(c, http.StatusUnauthorized, http.StatusUnauthorized, consts.ErrorsRefreshTokenFail, "")
-	//终止可能已经被加载的其他回调函数的执行
-	c.Abort()
-}
-
-// ErrorCasbinAuthFail 鉴权失败，返回 405 方法不允许访问
-func ErrorCasbinAuthFail(c *gin.Context, msg interface{}) {
-	ReturnJson(c, http.StatusMethodNotAllowed, http.StatusMethodNotAllowed, consts.ErrorsCasbinNoAuthorization, msg)
-	c.Abort()
-}
-
-// ErrorTokenBaseInfo token 基本的格式错误
-func ErrorTokenBaseInfo(c *gin.Context) {
-	ReturnJson(c, http.StatusBadRequest, http.StatusBadRequest, consts.ErrorsTokenBaseInfo, "")
-	//终止可能已经被加载的其他回调函数的执行
 	c.Abort()
 }

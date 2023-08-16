@@ -7,7 +7,6 @@ import (
 	"gin-pro/library/config/iconfig"
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
-	"go.uber.org/zap"
 	"log"
 	"sync"
 	"time"
@@ -22,11 +21,8 @@ func init() {
 
 // 判断相关键是否已经缓存
 func (y *Config) keyIsCache(keyName string) bool {
-	if _, exists := containers.Exists(system.ConfigKeyPrefix + keyName); exists {
-		return true
-	} else {
-		return false
-	}
+	_, exists := containers.Exists(system.ConfigKeyPrefix + keyName)
+	return exists
 }
 
 // 对键值进行缓存
@@ -82,19 +78,6 @@ func (y *Config) ConfigFileChangeListen() {
 		}
 	})
 	y.viper.WatchConfig()
-}
-
-func (y *Config) Clone(fileName string) iconfig.IConfig {
-	// 这里存在一个深拷贝，需要注意，避免拷贝的结构体操作对原始结构体造成影响
-	var ymlC = *y
-	var ymlConfViper = *(y.viper)
-	(&ymlC).viper = &ymlConfViper
-
-	(&ymlC).viper.SetConfigName(fileName)
-	if err := (&ymlC).viper.ReadInConfig(); err != nil {
-		system.ZapLog.Error(consts.ErrorsConfigInitFail, zap.Error(err))
-	}
-	return &ymlC
 }
 
 func (y *Config) Get(keyName string) any {
