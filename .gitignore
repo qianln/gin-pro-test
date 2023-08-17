@@ -11,5 +11,6 @@ storage/logs/*
 /.hotbuild.toml
 /tmp/tmp_bin
 /storage/logs/*.log
+/artisan
 
 

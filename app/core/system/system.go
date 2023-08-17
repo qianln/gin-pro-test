@@ -4,6 +4,7 @@ import (
 	"gin-pro/app/global/consts"
 	"gin-pro/library/config/iconfig"
 	"gin-pro/library/snow_flake"
+	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 	"log"
@@ -18,10 +19,11 @@ var (
 	DateFormat            = "2006-01-02 15:04:05"     // 设置全局日期时间格式
 	DateFormatMilliSecond = "2006-01-02 15:04:05.000" // 设置全局日期时间格式
 
-	ZapLog    *zap.Logger           // 全局日志指针
-	Config    iconfig.IConfig       // 加载全局配置文件
-	DbMysql   *gorm.DB              // 全局gorm的客户端连接
-	SnowFlake *snow_flake.Snowflake // 雪花算法全局变量
+	ZapLog       *zap.Logger           // 全局日志指针
+	Config       iconfig.IConfig       // 加载全局配置文件
+	DbMysql      *gorm.DB              // 全局gorm的客户端连接
+	SnowFlake    *snow_flake.Snowflake // 雪花算法全局变量
+	CobraCommand *cobra.Command        // cli 模式
 )
 
 func init() {

@@ -4,6 +4,7 @@ import (
 	"gin-pro/app/console"
 	"gin-pro/app/core/system"
 	"gin-pro/app/global/consts"
+	"gin-pro/library/cobra_command"
 	"gin-pro/library/config"
 	"gin-pro/library/mysql_gorm"
 	"gin-pro/library/snow_flake"
@@ -43,6 +44,9 @@ func init() {
 
 	// 7.注册计划任务
 	console.Schedule()
+
+	// 注册全局命令行参数
+	system.CobraCommand = cobra_command.NewCobraCommand()
 
 }
 

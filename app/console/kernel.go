@@ -6,6 +6,12 @@ import (
 	"github.com/robfig/cron/v3"
 )
 
+func Command() {
+	system.CobraCommand.AddCommand(
+		commands.NewPrintLog().AddCommand().CobraCommand,
+	)
+}
+
 func Schedule() {
 	c := cron.New()
 
@@ -13,7 +19,7 @@ func Schedule() {
 	//	@every 5s 每几秒执行一次
 	//	支持linux crontab 命令
 
-	c.AddFunc("@every 30s", commands.NewPrintLog().Handle())
+	c.AddFunc("@every 2s", commands.NewPrintLog().Handle)
 
 	if system.Config.GetBool("AppDebug") == false {
 		go c.Start()

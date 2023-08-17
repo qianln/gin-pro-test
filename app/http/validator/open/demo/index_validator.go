@@ -2,7 +2,6 @@ package demo
 
 import (
 	"gin-pro/app/http"
-	"gin-pro/app/http/validator/common_data"
 	"gin-pro/app/utils/response"
 	"github.com/gin-gonic/gin"
 )
@@ -12,7 +11,6 @@ func NewIndexValidator() *IndexValidator {
 }
 
 type IndexValidator struct {
-	common_data.IntId
 }
 
 func (i IndexValidator) CheckParams(context *gin.Context) {
