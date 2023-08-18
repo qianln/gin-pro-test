@@ -3,6 +3,7 @@ package system
 import (
 	"gin-pro/app/global/consts"
 	"gin-pro/library/config/iconfig"
+	"gin-pro/library/queue"
 	"gin-pro/library/snow_flake"
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
@@ -24,6 +25,7 @@ var (
 	DbMysql      *gorm.DB              // 全局gorm的客户端连接
 	SnowFlake    *snow_flake.Snowflake // 雪花算法全局变量
 	CobraCommand *cobra.Command        // cli 模式
+	Queue        *queue.Engine         // 系统队列 适合用于处理一些并发任务 延迟处理
 )
 
 func init() {

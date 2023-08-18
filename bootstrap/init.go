@@ -7,6 +7,7 @@ import (
 	"gin-pro/library/cobra_command"
 	"gin-pro/library/config"
 	"gin-pro/library/mysql_gorm"
+	"gin-pro/library/queue"
 	"gin-pro/library/snow_flake"
 	"gin-pro/library/validator_translation"
 	"gin-pro/library/zap_log"
@@ -22,6 +23,7 @@ func init() {
 
 	// 2.读取配置文件到容器内 监听配置文件变化
 	system.Config = config.NewConfig()
+	system.Config.ConfigFileChangeListen()
 
 	// 3.初始化全局日志句柄，并载入日志钩子处理函数
 	system.ZapLog = zap_log.NewZapLog(sys_log_hook.ZapLogHandler)
@@ -45,7 +47,11 @@ func init() {
 	// 7.注册计划任务
 	console.Schedule()
 
-	// 注册全局命令行参数
+	// 8. 注册系统内置队列
+	system.Queue = queue.NewEngine()
+	queue.Listen()
+
+	// 9. 注册全局命令行参数
 	system.CobraCommand = cobra_command.NewCobraCommand()
 
 }
