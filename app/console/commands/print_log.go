@@ -15,8 +15,10 @@ type PrintLog struct {
 
 func (p *PrintLog) AddCommand() *PrintLog {
 	p.CobraCommand = &cobra.Command{
-		Use:   "command:PrintLog", // 执行命令
-		Short: "打印日志",             // 注释
+		// 执行命令
+		Use: "command:PrintLog",
+		// 注释
+		Short: "打印日志",
 		Run: func(cmd *cobra.Command, args []string) {
 			p.Handle()
 		},

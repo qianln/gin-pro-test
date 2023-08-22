@@ -75,6 +75,7 @@ func checkRequiredFolders() {
 		}
 	}
 
+	// 温斗丝用户记得用管理员窗口启动 还是启动不了注释掉 手动创建软连接即可
 	if err := os.Symlink(system.BasePath+"/storage/app", system.BasePath+"/public/storage"); err != nil {
 		log.Fatal(consts.ErrorsSoftLinkCreateFail + err.Error())
 	}

@@ -1,5 +1,5 @@
-AppDebug: true
 AppName: gin-pro
+AppDebug: true
 
 HttpServer:
     Port: ":8001"                       # 项目端口

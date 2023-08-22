@@ -7,8 +7,6 @@ import (
 )
 
 func main() {
-	system.Config.ConfigFileChangeListen()
-
 	r := routers.NewRouter()
 
 	_ = r.Run(system.Config.GetString("HttpServer.Port"))

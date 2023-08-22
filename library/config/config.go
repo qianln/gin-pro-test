@@ -50,8 +50,8 @@ func NewConfig() iconfig.IConfig {
 	config := viper.New()
 
 	config.AddConfigPath(system.BasePath + "/config")
-	config.SetConfigName("config") // 设置文件名默认 config
-	config.SetConfigType("yml")    // 设置配置文件类型(后缀)为 yml
+	config.SetConfigName("config")
+	config.SetConfigType("yml")
 
 	if err := config.ReadInConfig(); err != nil {
 		log.Fatal(consts.ErrorsConfigInitFail + err.Error())

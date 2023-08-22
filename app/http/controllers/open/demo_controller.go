@@ -1,8 +1,10 @@
 package open
 
 import (
+	"gin-pro/app/global/consts"
 	"gin-pro/app/http/controllers"
 	"gin-pro/app/modules/models"
+	"gin-pro/app/utils/response"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,5 +19,9 @@ type DemoController struct {
 }
 
 func (d DemoController) Index(c *gin.Context) {
+
+	response.Success(c, consts.HttpStatusOkMsg, gin.H{
+		"hello": "gin-pro",
+	})
 
 }
