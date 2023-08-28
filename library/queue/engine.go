@@ -16,7 +16,7 @@ type Engine struct {
 	Que       ijobs.IJobs
 }
 
-func (s *Engine) Display(q ijobs.IJobs) {
+func (s *Engine) Dispatch(q ijobs.IJobs) {
 	qqs := Engine{
 		SleepTime: s.SleepTime,
 		Que:       q,
